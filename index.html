@@ -169,7 +169,7 @@
     .hero-bg {
       position: relative;
       width: 100%;
-      height: 75vh;
+      height: 55vh;
       /* Matches previous hero-bg height */
       min-height: 22rem;
       max-height: 850px;
@@ -535,10 +535,6 @@
         padding-right: 0;
       }
 
-      .footer-row {
-        padding: 1rem;
-      }
-
       .hero-bg {
         min-height: 9rem;
       }
@@ -554,14 +550,16 @@
       }
 
       .footer-row {
-        flex-direction: column;
-        gap: 1.2rem;
-        align-items: flex-start;
-      }
-
-      .footer-order {
-        text-align: left;
-      }
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.3rem;
+    padding: 1rem;
+  }
+  .footer-order {
+    align-items: flex-start;
+    text-align: left;
+    min-width: unset;
+  }
 
       .product-card {
         max-width: 100%;
@@ -584,7 +582,24 @@
       }
     }
 
+    @media (max-width: 350px) {
+  .logo-img {
+    width: 5rem;
+    height: 0.5rem;
+  }
+  .header-phone {
+    font-size: 0.84rem;
+  }
+}
+
     @media (max-width: 500px) {
+      .logo-img {
+    width: 7rem;
+    height: 0.7rem;
+  }
+  .header-phone {
+    font-size: 0.95rem;
+  }
       .container {
         padding-left: 0.7rem;
         padding-right: 0.7rem;
