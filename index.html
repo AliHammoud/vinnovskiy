@@ -592,7 +592,7 @@
 
       .coords-block {
         flex-basis: 48%;
-        padding-left: 0.5rem;
+        padding-left: 1rem;
       }
 
       .coords-val {
@@ -602,13 +602,24 @@
       .coords-link {
         font-size: 0.97rem;
       }
+
+      .assortment-grid {
+    flex-direction: column;
+    gap: 4rem;     /* Increase vertical gap */
+  }
+  .product-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
     }
 
     @media (max-width: 350px) {
       .logo-img {
-        width: 8rem;
-        height: 0.8rem;
-      }
+    width: 12rem;
+    height: 1.2rem;
+    max-width: 50vw;
+  }
 
       .header-phone {
         font-size: 0.84rem;
@@ -619,10 +630,11 @@
     }
 
     @media (max-width: 500px) {
-      .logo-img {
-        width: 9rem;
-        height: 0.9rem;
-      }
+        .logo-img {
+    width: 16rem;      /* Make it BIG for small screens */
+    height: 1.6rem;
+    max-width: 50vw;   /* Never overflow */
+  }
 
       .header-phone {
         font-size: 0.95rem;
@@ -633,9 +645,6 @@
         padding-right: 0.7rem;
       }
 
-      .footer-row {
-        padding: 1rem;
-      }
 
       .header,
       .hero,
@@ -644,6 +653,10 @@
       .footer-row {
         padding-left: 0;
         padding-right: 0;
+      }
+
+      .footer-row {
+        padding: 1.5rem;
       }
 
       .hero-bg {
@@ -655,31 +668,42 @@
       }
 
       .product-card {
+        padding-top: 5rem;
         max-width: 100%;
         min-width: 100%;
       }
 
       .quarry-row {
+        padding-top: 1rem;
         gap: 0.7rem;
       }
 
       .quarry-img-wrap {
-        max-width: 44%;
-        flex-basis: 44%;
+        max-width: 50%;
+        flex-basis: 50%;
       }
 
       .coords-block {
         flex-basis: 56%;
-        padding-left: 0.2rem;
+        padding-left: 0.5rem;
       }
 
       .coords-val {
-        font-size: 1rem;
+        font-size: 2rem;
       }
 
       .coords-link {
         font-size: 0.89rem;
       }
+
+      .assortment-grid {
+    flex-direction: column;
+    gap: 5rem;     /* Increase vertical gap */
+  }
+  .product-card {
+    width: 100%;
+    max-width: 100%;
+  }
     }
   </style>
 </head>
