@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Винновский Карьер</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Roboto Flex font (lightest weights) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,400;8..144,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --main-font: 'Roboto Flex', Arial, sans-serif;
+      --heading-weight: 100;
+      --text-weight: 400;
+      --bg: #fff;
+      --footer-bg: #fafafa;
+      --primary: #222;
+      --muted: #777777;
+      --divider: #000;
+      --link: #000;
+      --section-pad: 2rem;
+      --radius: 2rem;
+      --radius-sm: 1.3rem;
+      --maxw: 1200px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--main-font);
+      font-weight: var(--text-weight);
+      background: var(--bg);
+      color: var(--primary);
+      box-sizing: border-box;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      transition: none;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      color: var(--link);
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--section-pad);
+      padding-right: var(--section-pad);
+    }
+
+    /* HEADER */
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--section-pad) 0 0 0;
+      background: var(--bg);
+      box-sizing: border-box;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo-img {
+      width: 14rem;
+      height: 1.4rem;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-title {
+      font-size: 1.26rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: 1rem;
+      white-space: nowrap;
+    }
+
+    .header-phone {
+      font-size: 1.18rem;
+      color: var(--link);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      text-decoration: underline;
+    }
+
+    /* HERO */
+    .hero {
+      width: 100%;
+      padding: var(--section-pad) 0 0 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-bg {
+      width: 100%;
+      min-height: 22rem;
+      height: 75vh;
+      max-height: 850px;
+      border-radius: var(--radius);
+      background: url('https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1100&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-family: var(--main-font);
+      font-size: 4rem;
+      font-weight: var(--heading-weight);
+      color: var(--primary);
+      padding: 2rem 0 2.5rem 2rem;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 0;
+      text-shadow: none;
+      word-break: break-word;
+      background: none;
+    }
+
+    /* QUARRY ROW */
+    .quarry-row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      padding: var(--section-pad) 0 0 0;
+      gap: var(--section-pad);
+      box-sizing: border-box;
+    }
+
+    .quarry-img-wrap {
+      flex: 0 1 60%;
+      min-width: 150px;
+      max-width: 60%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .quarry-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      background: #eaeaea;
+      display: block;
+      border-radius: var(--radius-sm);
+    }
+
+    .coords-block {
+      flex: 0 1 40%;
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      /* Align vertically to the top */
+      align-items: flex-start;
+      /* Align horizontally to the left */
+      padding: 0;
+      box-sizing: border-box;
+      /* Remove background/borders if present */
+      background: none;
+      border: none;
+    }
+
+    .coords-val {
+      font-size: 2.3rem;
+      font-weight: var(--heading-weight);
+      margin-bottom: 0.2em;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .coords-link {
+      margin-top: 0.6rem;
+      font-size: 1.04rem;
+      color: var(--link);
+      text-decoration: underline;
+      font-weight: var(--text-weight);
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* ASSORTMENT SECTIONS */
+    .assortment-section {
+      width: 100%;
+      margin-top: 2rem;
+      padding: var(--section-pad) 0 0 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .assortment-title {
+      font-size: 1.13rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: 0.03em;
+      color: var(--primary);
+      font-family: var(--main-font);
+    }
+
+    .assortment-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+
+    /* PRODUCT CARDS */
+    .product-card {
+      background: var(--bg);
+      flex: 1 1 0;
+      max-width: calc((100% - 3 * 2rem) / 4);
+      /* 4 cards per row desktop */
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    .product-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 0.7rem;
+      display: block;
+      background: #f4f4f4;
+    }
+
+    .product-title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 0.2rem;
+      font-family: var(--main-font);
+      font-size: 1.01rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .product-title span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      margin-right: 0;
+      margin-bottom: 0.1em;
+      line-height: 1.1;
+    }
+
+    .product-fraction {
+      font-size: 1.01rem;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+      font-family: var(--main-font);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 0.7rem 0 0.8rem 0;
+      border: none;
+    }
+
+    .product-prices {
+      font-size: 1.09rem;
+      color: var(--primary);
+      text-align: left;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .product-prices-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .product-prices strong {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .product-prices span {
+      display: inline;
+      font-weight: normal;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-left: 0.25rem;
+      white-space: nowrap;
+    }
+
+    /* FOOTER */
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 2rem;
+      box-sizing: border-box;
+      background: #fafafa;
+      border-radius: 1.3rem;
+      gap: 2rem;
+      margin-top: 3.2rem;
+    }
+
+    .footer-coords {
+      font-size: 2.16rem;
+      font-weight: var(--heading-weight);
+      margin-bottom: 0.3em;
+      line-height: 1.05;
+    }
+
+    .footer-coords-link {
+      font-size: 1.07rem;
+      color: var(--link);
+      text-decoration: underline;
+      font-weight: var(--text-weight);
+    }
+
+    .footer-order {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      /* Right-align text & phone */
+      justify-content: flex-start;
+      /* Top of the block */
+      font-size: 1.09rem;
+      color: var(--muted);
+      min-width: 160px;
+      text-align: right;
+    }
+
+
+    .footer-order-title {
+      font-size: 1.07rem;
+      color: var(--muted);
+      margin-bottom: 0.5em;
+    }
+
+    .footer-order-phone {
+      font-size: 1.14rem;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: underline;
+      margin-top: 0.3em;
+      display: inline-block;
+      letter-spacing: 0.01em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .product-card {
+        max-width: calc((100% - 2 * 2rem) / 3);
+      }
+
+      .quarry-img-wrap {
+        max-width: 55%;
+        flex-basis: 55%;
+      }
+
+      .coords-block {
+        flex-basis: 45%;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .product-card {
+        max-width: calc((100% - 2 * 2rem) / 2);
+      }
+
+      .assortment-grid {
+        gap: 1rem;
+      }
+
+      .quarry-img-wrap {
+        max-width: 60%;
+        flex-basis: 60%;
+      }
+
+      .coords-block {
+        flex-basis: 40%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .header,
+      .hero,
+      .quarry-row,
+      .assortment-section,
+      .footer-row {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .footer-row {
+        padding: 1rem;
+      }
+
+      .hero-bg {
+        min-height: 9rem;
+      }
+
+      .hero-title {
+        font-size: 1.2rem;
+        padding: 1rem 0 1.2rem 1rem;
+      }
+
+      .coords-block,
+      .footer-coords {
+        font-size: 1.1rem;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: flex-start;
+      }
+
+      .footer-order {
+        text-align: left;
+      }
+
+      .product-card {
+        max-width: 100%;
+        min-width: 100%;
+      }
+
+      .quarry-row {
+        flex-direction: row;
+        gap: 1rem;
+      }
+
+      .quarry-img-wrap {
+        max-width: 60%;
+        flex-basis: 60%;
+      }
+
+      .coords-block {
+        flex-basis: 40%;
+        padding-left: 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+      }
+
+      .footer-row {
+        padding: 0.7rem;
+      }
+
+      .header,
+      .hero,
+      .quarry-row,
+      .assortment-section,
+      .footer-row {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .hero-bg {
+        min-height: 7rem;
+      }
+
+      .footer-row {
+        gap: 1rem;
+      }
+
+      .product-card {
+        max-width: 100%;
+        min-width: 100%;
+      }
+
+      .quarry-row {
+        gap: 0.7rem;
+      }
+
+      .quarry-img-wrap {
+        max-width: 60%;
+        flex-basis: 60%;
+      }
+
+      .coords-block {
+        flex-basis: 40%;
+        padding-left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo-wrap">
+        <img src="/mnt/data/logo.svg" alt="Винновский Карьер" class="logo-img" width="224" height="22">
+        <span class="brand-title"></span>
+      </div>
+      <a class="header-phone" href="tel:+79996660001">+7 (999) 666 00 01</a>
+    </div>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-bg">
+        <div class="hero-title" style="font-weight:100;">
+          ВЕСЬМА ТЕХНОЛОГИЧНЫЙ<br>
+          ПЕСОК РОДОМ<br>
+          ИЗ ВОЛГОГРАДСКОЙ ОБЛАСТИ
+        </div>
+      </div>
+    </div>
+    <!-- COORDINATES / QUARRY BLOCK -->
+    <div class="quarry-row">
+      <div class="quarry-img-wrap">
+        <img class="quarry-img"
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80"
+          alt="Карьeр">
+      </div>
+      <div class="coords-block">
+        <div class="coords-val">48.889455’<br>44.608410’’</div>
+        <a class="coords-link" href="https://yandex.ru/maps/?ll=44.608410,48.889455&z=15" target="_blank">смотреть на
+          карте</a>
+      </div>
+    </div>
+    <!-- ASSORTMENT -->
+    <div class="assortment-section">
+      <div class="assortment-title">ассортимент</div>
+      <!-- Карьерный -->
+      <div class="assortment-grid">
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10648.png" alt="карьерный крупный">
+          <div class="product-title">
+            <span>карьерный</span>
+            крупный
+          </div>
+          <div class="product-fraction">[2.5мм - 3.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>120 ₽</strong><span>за тонну</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10647.png" alt="карьерный мелкий">
+          <div class="product-title">
+            <span>карьерный</span>
+            мелкий
+          </div>
+          <div class="product-fraction">[2.0мм - 2.5мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>120 ₽</strong><span>за тонну</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10646.png" alt="карьерный супер">
+          <div class="product-title">
+            <span>карьерный</span>
+            супер
+          </div>
+          <div class="product-fraction">[1.5мм - 2.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>120 ₽</strong><span>за тонну</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10645.png" alt="карьерный ультра">
+          <div class="product-title">
+            <span>карьерный</span>
+            ультра
+          </div>
+          <div class="product-fraction">[1.5мм - 1.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>120 ₽</strong><span>за тонну</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Мытый -->
+      <div class="assortment-grid">
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10644.png" alt="мытый крупный">
+          <div class="product-title">
+            <span>мытый</span>
+            крупный
+          </div>
+          <div class="product-fraction">[2.5мм - 3.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>700 ₽</strong><span>за тонну (от 10т)</span></div>
+            <div class="product-prices-row"><strong>710 ₽</strong><span>за тонну (от 1т)</span></div>
+            <div class="product-prices-row"><strong>720 ₽</strong><span>за тонну (0.5т)</span></div>
+            <div class="product-prices-row"><strong>730 ₽</strong><span>за тонну (от 5т)</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10643.png" alt="мытый мелкий">
+          <div class="product-title">
+            <span>мытый</span>
+            мелкий
+          </div>
+          <div class="product-fraction">[2.0мм - 2.5мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>650 ₽</strong><span>за тонну (от 10т)</span></div>
+            <div class="product-prices-row"><strong>660 ₽</strong><span>за тонну (от 1т)</span></div>
+            <div class="product-prices-row"><strong>670 ₽</strong><span>за тонну (0.5т)</span></div>
+            <div class="product-prices-row"><strong>680 ₽</strong><span>за тонну (от 5т)</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10642.png" alt="мытый супер">
+          <div class="product-title">
+            <span>мытый</span>
+            супер
+          </div>
+          <div class="product-fraction">[1.5мм - 2.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>550 ₽</strong><span>за тонну (от 10т)</span></div>
+            <div class="product-prices-row"><strong>560 ₽</strong><span>за тонну (от 1т)</span></div>
+            <div class="product-prices-row"><strong>570 ₽</strong><span>за тонну (0.5т)</span></div>
+            <div class="product-prices-row"><strong>580 ₽</strong><span>за тонну (от 5т)</span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10641.png" alt="мытый ультра">
+          <div class="product-title">
+            <span>мытый</span>
+            ультра
+          </div>
+          <div class="product-fraction">[1.5мм - 1.0мм]</div>
+          <div class="divider"></div>
+          <div class="product-prices">
+            <div class="product-prices-row"><strong>450 ₽</strong><span>за тонну (от 10т)</span></div>
+            <div class="product-prices-row"><strong>460 ₽</strong><span>за тонну (от 1т)</span></div>
+            <div class="product-prices-row"><strong>470 ₽</strong><span>за тонну (0.5т)</span></div>
+            <div class="product-prices-row"><strong>480 ₽</strong><span>за тонну (от 5т)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- BOTTOM / FOOTER -->
+    <div class="footer-row">
+      <div>
+        <div class="footer-coords">48.889455’<br>44.608410’’</div>
+        <a class="footer-coords-link" href="https://yandex.ru/maps/?ll=44.608410,48.889455&z=15"
+          target="_blank">смотреть на карте</a>
+      </div>
+      <div class="footer-order">
+        <a class="footer-order-phone" href="tel:+79996660001">+7 (999) 666 00 01</a>
+        <div class="footer-order-title">заказать песок</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
