@@ -6,10 +6,49 @@
   <title>Винновский Карьер</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Roboto Flex font (lightest weights) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,400;8..144,700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,400;8..144,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <style>
+    .HMND-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #999;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.HMND-container img {
+  height: 1rem;
+}
+
+    .sand-magnifier {
+      display: none;
+      position: absolute;
+      pointer-events: none;
+      width: 240px;
+      /* 2x previous size */
+      height: 240px;
+      border-radius: 50%;
+      border: none;
+      /* No border */
+      box-shadow: none;
+      /* No shadow */
+      z-index: 30;
+      background-repeat: no-repeat;
+      background-size: 250% 250%;
+      /* Zoom factor (can adjust) */
+      transition: opacity 0.12s;
+    }
+
+
+    .product-card {
+      position: relative;
+      /* Needed so magnifier can be absolutely positioned */
+    }
+
     :root {
       --main-font: 'Roboto Flex', Arial, sans-serif;
       --heading-weight: 100;
@@ -109,32 +148,83 @@
       align-items: stretch;
     }
 
-    .hero-bg {
+    .sand-video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      min-height: 22rem;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+      /* Smooth fade-in for video if you want: */
+      transition: opacity 0.5s;
+    }
+
+    .hide-video {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-bg {
+      position: relative;
+      width: 100%;
       height: 75vh;
+      /* Matches previous hero-bg height */
+      min-height: 22rem;
       max-height: 850px;
       border-radius: var(--radius);
-      background: url('https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1100&q=80') center/cover no-repeat;
+      overflow: hidden;
+      background: #ddd;
+      /* fallback color while loading */
       display: flex;
       align-items: flex-end;
-      position: relative;
-      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    #sand-sim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: auto;
+      background: transparent;
+      display: block;
     }
 
     .hero-title {
-      font-family: var(--main-font);
-      font-size: 4rem;
-      font-weight: var(--heading-weight);
-      color: var(--primary);
-      padding: 2rem 0 2.5rem 2rem;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin: 0;
-      text-shadow: none;
-      word-break: break-word;
-      background: none;
-    }
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  pointer-events: none;
+  font-size: clamp(1.1rem, 4vw, 2.5rem); /* Even smaller */
+  font-weight: 200;
+  line-height: 1.08;
+  padding: 4rem;         /* At least 4rem on all sides */
+  box-sizing: border-box;
+  color: var(--primary);
+  font-family: var(--main-font);
+}
+
+.hero-title span {
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  /* Optionally, max-width: 80%; */
+}
+
+.product-card.faded {
+  opacity: 0.38;
+  transition: opacity 0.24s;
+}
+.product-card {
+  transition: opacity 0.24s;
+}
 
     /* QUARRY ROW */
     .quarry-row {
@@ -226,7 +316,7 @@
     .assortment-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 4rem;
       width: 100%;
       justify-content: space-between;
       margin-bottom: 2.5rem;
@@ -341,7 +431,8 @@
       background: #fafafa;
       border-radius: 1.3rem;
       gap: 2rem;
-      margin-top: 3.2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
 
     .footer-coords {
@@ -422,6 +513,12 @@
         flex-basis: 40%;
       }
     }
+    
+    @media (max-width: 400px) {
+  .hero-title {
+    padding: 1rem;
+  }
+}
 
     @media (max-width: 700px) {
       .container {
@@ -448,7 +545,7 @@
 
       .hero-title {
         font-size: 1.2rem;
-        padding: 1rem 0 1.2rem 1rem;
+        padding:2rem;
       }
 
       .coords-block,
@@ -541,27 +638,40 @@
     <!-- HEADER -->
     <div class="header">
       <div class="logo-wrap">
-        <img src="/mnt/data/logo.svg" alt="Винновский Карьер" class="logo-img" width="224" height="22">
+        <img src="./img/logo.svg" alt="Винновский Карьер" class="logo-img" width="224" height="22">
         <span class="brand-title"></span>
       </div>
       <a class="header-phone" href="tel:+79996660001">+7 (999) 666 00 01</a>
     </div>
     <!-- HERO -->
     <div class="hero">
-      <div class="hero-bg">
-        <div class="hero-title" style="font-weight:100;">
-          ВЕСЬМА ТЕХНОЛОГИЧНЫЙ<br>
-          ПЕСОК РОДОМ<br>
-          ИЗ ВОЛГОГРАДСКОЙ ОБЛАСТИ
+      <div class="hero-bg" style="position: relative; overflow: hidden;">
+        <!-- Video background -->
+        <video id="sand-video" class="sand-video hide-video" autoplay loop muted playsinline poster="">
+          <source src="./img/truck.mp4" type="video/mp4">
+          <!-- Optionally add .webm source for best support -->
+          <!-- <source src="YOUR_VIDEO.webm" type="video/webm"> -->
+          Your browser does not support the video tag.
+        </video>
+        <!-- Sand overlay -->
+        <canvas id="sand-sim"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:auto; z-index:2;"></canvas>
+        <!-- Hero text block overlays everything (z-index:3 to be above sand if needed) -->
+        <div class="hero-title"
+          style="position: absolute; z-index: 3; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: flex-end; pointer-events: none;">
+          <span>
+            ВЕСЬМА ТЕХНОЛОГИЧНЫЙ<br>
+            ПЕСОК РОДОМ<br>
+            ИЗ ВОЛГОГРАДСКОЙ ОБЛАСТИ
+          </span>
         </div>
       </div>
+
     </div>
     <!-- COORDINATES / QUARRY BLOCK -->
     <div class="quarry-row">
       <div class="quarry-img-wrap">
-        <img class="quarry-img"
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80"
-          alt="Карьeр">
+        <img class="quarry-img" src="./img/Quarry.png" alt="Карьeр">
       </div>
       <div class="coords-block">
         <div class="coords-val">48.889455’<br>44.608410’’</div>
@@ -575,7 +685,7 @@
       <!-- Карьерный -->
       <div class="assortment-grid">
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10648.png" alt="карьерный крупный">
+          <img class="product-img" src="./img/products/карьер1.png" alt="карьерный крупный">
           <div class="product-title">
             <span>карьерный</span>
             крупный
@@ -587,7 +697,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10647.png" alt="карьерный мелкий">
+          <img class="product-img" src="./img/products/карьер2.png" alt="карьерный мелкий">
           <div class="product-title">
             <span>карьерный</span>
             мелкий
@@ -599,7 +709,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10646.png" alt="карьерный супер">
+          <img class="product-img" src="./img/products/карьер3.png" alt="карьерный супер">
           <div class="product-title">
             <span>карьерный</span>
             супер
@@ -611,7 +721,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10645.png" alt="карьерный ультра">
+          <img class="product-img" src="./img/products/карьер4.png" alt="карьерный ультра">
           <div class="product-title">
             <span>карьерный</span>
             ультра
@@ -626,7 +736,7 @@
       <!-- Мытый -->
       <div class="assortment-grid">
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10644.png" alt="мытый крупный">
+          <img class="product-img" src="./img/products/мытый1.png" alt="мытый крупный">
           <div class="product-title">
             <span>мытый</span>
             крупный
@@ -641,7 +751,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10643.png" alt="мытый мелкий">
+          <img class="product-img" src="./img/products/мытый2.png" alt="мытый мелкий">
           <div class="product-title">
             <span>мытый</span>
             мелкий
@@ -656,7 +766,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10642.png" alt="мытый супер">
+          <img class="product-img" src="./img/products/мытый3.png" alt="мытый супер">
           <div class="product-title">
             <span>мытый</span>
             супер
@@ -671,7 +781,7 @@
           </div>
         </div>
         <div class="product-card">
-          <img class="product-img" src="https://pngimg.com/uploads/sand/sand_PNG10641.png" alt="мытый ультра">
+          <img class="product-img" src="./img/products/мытый4.png" alt="мытый ультра">
           <div class="product-title">
             <span>мытый</span>
             ультра
@@ -699,7 +809,504 @@
         <div class="footer-order-title">заказать песок</div>
       </div>
     </div>
+    <div class="HMND-container">
+  <p>создано</p>
+  <a href="https://hmnd.ru" target="_blank"></a>
+    <img src="./img/HMND_logo.svg" alt="HMND Studio Logo">
+  </a>
+</div>
   </div>
+  <script>
+    // --- PARAMETERS ---
+    const OVERDRAW = 0.24;
+    const GRAIN_SPACING = 1.05;
+    const GRAIN_SIZE = 1.7;
+    const HEIGHTMAP_SCALE = 0.13;
+    const HEIGHTMAP_FREQ = 0.011;
+
+    // --- DEVICE/TABLET/PHONE DETECTION & ADAPTIVE BRUSH ---
+    const IS_TOUCH = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+
+    let sandDrawn = false; // add this at top-level
+
+    function getBrushSize() {
+      const width = window.innerWidth;
+      if (IS_TOUCH) return [42, 78]; // MUCH bigger brush on mobile/tablet!
+      if (width < 700) return [28, 45]; // larger even for small screens
+      return [62, 120]; // larger on desktop too
+    }
+    let [brushMin, brushMax] = getBrushSize();
+
+    function getBrushFalloff() {
+      const width = window.innerWidth;
+      if (width < 700) return 3.0;
+      if (IS_TOUCH) return 2.4;
+      return 1.6;
+    }
+    let brushFalloff = getBrushFalloff();
+
+    // --- HEIGHTMAP ---
+    function noise2D(x, y) {
+      return (
+        Math.sin(x * 0.07 + y * 0.011) * 0.43 +
+        Math.sin(x * 0.018 - y * 0.13) * 0.33 +
+        Math.cos(x * 0.011 + y * 0.07) * 0.22 +
+        Math.sin(0.9 * x * 0.011 + y * 0.017) * 0.23
+      );
+    }
+
+    function getNormal(x, y) {
+      const eps = 1.5;
+      const dzdx = (noise2D((x + eps) * HEIGHTMAP_FREQ, y * HEIGHTMAP_FREQ) - noise2D((x - eps) * HEIGHTMAP_FREQ, y *
+        HEIGHTMAP_FREQ)) / (2 * eps);
+      const dzdy = (noise2D(x * HEIGHTMAP_FREQ, (y + eps) * HEIGHTMAP_FREQ) - noise2D(x * HEIGHTMAP_FREQ, (y - eps) *
+        HEIGHTMAP_FREQ)) / (2 * eps);
+      const n = new THREE.Vector3(-dzdx, -dzdy, 1.0).normalize();
+      return n;
+    }
+
+    function getCanvasDims() {
+      const canvas = document.getElementById('sand-sim');
+      return {
+        w: canvas.clientWidth,
+        h: canvas.clientHeight
+      };
+    }
+
+    // --- INIT ---
+    let {
+      w: CANVAS_W,
+      h: CANVAS_H
+    } = getCanvasDims();
+
+    let sandW = Math.ceil(CANVAS_W * (1 + OVERDRAW * 2));
+    let sandH = Math.ceil(CANVAS_H * (1 + OVERDRAW * 2));
+    let sandX0 = -OVERDRAW * CANVAS_W;
+    let sandY0 = -OVERDRAW * CANVAS_H;
+    let X_COUNT = Math.ceil(sandW / GRAIN_SPACING);
+    let Y_COUNT = Math.ceil(sandH / GRAIN_SPACING);
+    let GRAIN_COUNT = X_COUNT * Y_COUNT;
+
+    const dpr = window.devicePixelRatio || 1;
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('sand-sim'),
+      alpha: true,
+      antialias: true
+    });
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(CANVAS_W, CANVAS_H, false);
+    renderer.setClearColor(0xffffff, 0);
+
+    const camera = new THREE.OrthographicCamera(0, CANVAS_W, 0, CANVAS_H, -200, 200);
+    camera.position.z = 50;
+    const scene = new THREE.Scene();
+
+    // --- LIGHTING ---
+    const lightDir = new THREE.Vector3(-0.7, -1.0, 1.7).normalize();
+    const lightCol = new THREE.Color(0xffffff);
+    const sandColorBase = new THREE.Color(0xe2c590);
+
+    // --- CREATE SAND ---
+    let positions = new Float32Array(GRAIN_COUNT * 3);
+    let colors = new Float32Array(GRAIN_COUNT * 4); // RGBA
+    let alphas = new Float32Array(GRAIN_COUNT);
+
+    function generateSand() {
+      let idx = 0;
+      for (let ix = 0; ix < X_COUNT; ix++) {
+        for (let iy = 0; iy < Y_COUNT; iy++) {
+          const x = sandX0 + ix * GRAIN_SPACING + (Math.random() - 0.5) * 0.7;
+          const y = sandY0 + iy * GRAIN_SPACING + (Math.random() - 0.5) * 0.7;
+          const hmap = noise2D(x * HEIGHTMAP_FREQ, y * HEIGHTMAP_FREQ);
+          const z = hmap * HEIGHTMAP_SCALE * CANVAS_H + (Math.random() - 0.5) * 7.5;
+          positions[idx * 3] = x;
+          positions[idx * 3 + 1] = y;
+          positions[idx * 3 + 2] = z;
+
+          // --- Per-grain normalized coordinates for upper-right warmth bias
+          let normX = (x - sandX0) / sandW; // 0 at left, 1 at right
+          let normY = (y - sandY0) / sandH; // 0 at top, 1 at bottom
+
+          // The further to the upper right, the warmer it gets
+          let warmCornerFactor = Math.pow(0.5 * (normX + (1 - normY)), 2.2); // Highest at upper right
+          let warmHueBias = 0.02 * warmCornerFactor;
+
+          // --- Warmer base color, warmer upper right
+          let hue = 0.075 + (z * 0.0012) - warmHueBias; // Lower hue = warmer
+          let sat = 0.56 + Math.random() * 0.09 + 0.06 * warmCornerFactor; // More saturated in upper right
+          let light = 0.62 + Math.random() * 0.11 + z * 0.0009 + 0.05 * warmCornerFactor; // Brighter in upper right
+          sandColorBase.setHSL(hue, sat, light);
+
+          // --- Rare dark speckles
+          if (Math.random() < 0.045) {
+            sandColorBase.offsetHSL(0, -0.12, -0.23);
+          }
+
+          // Lighting
+          const n = getNormal(x, y);
+          const nl = Math.max(0, n.dot(lightDir));
+          const shadow = 0.94 - (1 - nl) * 0.25;
+
+          const r = sandColorBase.r * shadow + lightCol.r * 0.12 * nl;
+          const g = sandColorBase.g * shadow + lightCol.g * 0.12 * nl;
+          const b = sandColorBase.b * shadow + lightCol.b * 0.12 * nl;
+          colors[idx * 4 + 0] = r;
+          colors[idx * 4 + 1] = g;
+          colors[idx * 4 + 2] = b;
+          colors[idx * 4 + 3] = 1.0;
+          alphas[idx] = 1.0;
+          idx++;
+        }
+      }
+    }
+
+    generateSand();
+
+    let geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 4));
+
+    const material = new THREE.PointsMaterial({
+      size: GRAIN_SIZE,
+      vertexColors: true,
+      transparent: true,
+      opacity: 1,
+      sizeAttenuation: false
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    function updateAlphas() {
+      for (let i = 0; i < GRAIN_COUNT; i++) {
+        colors[i * 4 + 3] = alphas[i];
+      }
+      geometry.attributes.color.needsUpdate = true;
+    }
+
+    // --- PARALLAX ---
+    let mouseTarget = {
+        x: 0,
+        y: 0
+      },
+      mouseParallax = {
+        x: 0,
+        y: 0
+      };
+    renderer.domElement.addEventListener('pointermove', e => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouseTarget.x = ((e.clientX - rect.left) / rect.width - 0.5) * 25;
+      mouseTarget.y = ((e.clientY - rect.top) / rect.height - 0.5) * 14;
+    });
+
+    function applyParallax() {
+      mouseParallax.x += (mouseTarget.x - mouseParallax.x) * 0.06;
+      mouseParallax.y += (mouseTarget.y - mouseParallax.y) * 0.06;
+      camera.position.x = mouseParallax.x;
+      camera.position.y = mouseParallax.y;
+    }
+
+    // --- BRUSH: adaptive cubic falloff, adaptive size ---
+    let prevPointer = {
+      x: null,
+      y: null
+    };
+
+    function pointerBrush(e) {
+      const rect = renderer.domElement.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      let windX = 0,
+        windY = 0;
+      if (prevPointer.x !== null && prevPointer.y !== null) {
+        windX = (x - prevPointer.x) * 1.28;
+        windY = (y - prevPointer.y) * 1.28;
+      }
+      prevPointer.x = x;
+      prevPointer.y = y;
+
+      const now = performance.now() * 0.002;
+      const base = brushMin + (brushMax - brushMin) * (0.5 + 0.4 * Math.sin(now + x * 0.008 + y * 0.009));
+      const brushRadius = base + Math.random() * 13;
+
+      const pos = geometry.attributes.position.array;
+      let faded = false;
+      for (let i = 0; i < GRAIN_COUNT; i++) {
+        if (alphas[i] < 0.01) continue;
+        const gx = pos[i * 3];
+        const gy = pos[i * 3 + 1];
+        const dx = gx - x;
+        const dy = gy - y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < brushRadius) {
+          // Adaptive falloff
+          const fade = Math.max(0, 1 - dist / brushRadius);
+          const falloff = Math.pow(fade, brushFalloff);
+          const alphaMin = 0.01 + 0.06 * Math.random();
+          const fadeStep = falloff * (0.21 + Math.random() * 0.18);
+          alphas[i] = Math.max(alphaMin, alphas[i] - fadeStep);
+
+          pos[i * 3] += windX * falloff * (0.63 + Math.random() * 0.82) + (dx / (dist + 1)) * falloff * 0.45 * Math
+            .random();
+          pos[i * 3 + 1] += windY * falloff * (0.63 + Math.random() * 0.82) + (dy / (dist + 1)) * falloff * 0.45 * Math
+            .random();
+          faded = true;
+        }
+      }
+      if (faded) {
+        updateAlphas();
+        geometry.attributes.position.needsUpdate = true;
+      }
+    }
+
+    // --- INPUT EVENTS ---
+    function isTouchDevice() {
+      return IS_TOUCH;
+    }
+    let drawing = false;
+    if (!isTouchDevice()) {
+      renderer.domElement.addEventListener('mousemove', pointerBrush);
+      renderer.domElement.addEventListener('mouseleave', () => {
+        prevPointer.x = null;
+        prevPointer.y = null;
+      });
+    } else {
+      renderer.domElement.addEventListener('pointerdown', e => {
+        drawing = true;
+        pointerBrush(e);
+      });
+      renderer.domElement.addEventListener('pointermove', e => {
+        if (drawing) pointerBrush(e);
+      });
+      renderer.domElement.addEventListener('pointerup', e => {
+        drawing = false;
+        prevPointer.x = null;
+        prevPointer.y = null;
+      });
+      renderer.domElement.addEventListener('pointercancel', e => {
+        drawing = false;
+        prevPointer.x = null;
+        prevPointer.y = null;
+      });
+    }
+
+    let preventScroll = false;
+
+    function handleTouchMove(e) {
+      if (preventScroll) e.preventDefault();
+    }
+    let isCleaning = false;
+
+    renderer.domElement.addEventListener('touchstart', function (e) {
+      isCleaning = true;
+    }, {
+      passive: false
+    });
+
+    renderer.domElement.addEventListener('touchend', function (e) {
+      isCleaning = false;
+    }, {
+      passive: false
+    });
+
+    renderer.domElement.addEventListener('touchcancel', function (e) {
+      isCleaning = false;
+    }, {
+      passive: false
+    });
+
+    renderer.domElement.addEventListener('touchmove', function (e) {
+      if (isCleaning) {
+        e.preventDefault(); // Only block scroll when actively cleaning
+      }
+    }, {
+      passive: false
+    });
+
+
+
+    // --- RESET ---
+    // Double tap/click to reset -- REMOVED as per your request
+
+    renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
+
+    // --- RENDER LOOP ---
+    function render() {
+      applyParallax();
+      renderer.render(scene, camera);
+
+      // Only once: reveal the video after first sand render
+      if (!sandDrawn) {
+        document.getElementById('sand-video')?.classList.remove('hide-video');
+        sandDrawn = true;
+      }
+      requestAnimationFrame(render);
+    }
+    render();
+    // --- RESPONSIVE RESIZE ---
+    let prevW = window.innerWidth;
+    let prevH = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      const {
+        w,
+        h
+      } = getCanvasDims();
+      // Only reset if WIDTH actually changed, not just height (scroll)
+      if (w !== prevW /* || h !== prevH */ ) {
+        prevW = w;
+        prevH = h;
+        // Only now: regenerate sand
+        sandW = Math.ceil(w * (1 + OVERDRAW * 2));
+        sandH = Math.ceil(h * (1 + OVERDRAW * 2));
+        sandX0 = -OVERDRAW * w;
+        sandY0 = -OVERDRAW * h;
+        X_COUNT = Math.ceil(sandW / GRAIN_SPACING);
+        Y_COUNT = Math.ceil(sandH / GRAIN_SPACING);
+        GRAIN_COUNT = X_COUNT * Y_COUNT;
+        positions = new Float32Array(GRAIN_COUNT * 3);
+        colors = new Float32Array(GRAIN_COUNT * 4);
+        alphas = new Float32Array(GRAIN_COUNT);
+        generateSand();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 4));
+        updateAlphas();
+        geometry.attributes.position.needsUpdate = true;
+        renderer.setSize(w, h, false);
+        camera.right = w;
+        camera.bottom = h;
+        camera.updateProjectionMatrix();
+        [brushMin, brushMax] = getBrushSize();
+        brushFalloff = getBrushFalloff();
+      } else {
+        // Just update renderer/camera/canvas, don't regenerate sand
+        renderer.setSize(w, h, false);
+        camera.right = w;
+        camera.bottom = h;
+        camera.updateProjectionMatrix();
+        [brushMin, brushMax] = getBrushSize();
+        brushFalloff = getBrushFalloff();
+      }
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('.product-card').forEach(card => {
+      const img = card.querySelector('.product-img');
+      if (!img) return;
+
+      // Create the magnifier div
+      const magnifier = document.createElement('div');
+      magnifier.className = 'sand-magnifier';
+      card.appendChild(magnifier);
+
+      function setMagnifier(e) {
+        const rect = img.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        // Mouse position relative to image
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+
+        // Magnifier size/zoom
+        const size = magnifier.offsetWidth;
+        const zoom = 2.5;
+
+        // Position magnifier (centered on cursor)
+        magnifier.style.left = (x + rect.left - cardRect.left - size / 2) + 'px';
+        magnifier.style.top = (y + rect.top - cardRect.top - size / 2) + 'px';
+
+        // Set background image and position for zoom effect
+        magnifier.style.backgroundImage = `url('${img.src}')`;
+        magnifier.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
+        magnifier.style.backgroundPosition = `-${x * (zoom - 1)}px -${y * (zoom - 1)}px`;
+        magnifier.style.display = 'block';
+        magnifier.style.opacity = '1';
+      }
+
+      // Show magnifier on mouse enter
+      img.addEventListener('mouseenter', e => {
+        magnifier.style.display = 'block';
+        magnifier.style.opacity = '1';
+      });
+      // Move magnifier on mouse move
+      img.addEventListener('mousemove', setMagnifier);
+      // Hide magnifier on mouse leave
+      img.addEventListener('mouseleave', e => {
+        magnifier.style.display = 'none';
+        magnifier.style.opacity = '0';
+      });
+
+      // Touch support
+      img.addEventListener('touchstart', function (e) {
+        setMagnifier(e);
+        magnifier.style.display = 'block';
+        magnifier.style.opacity = '1';
+      });
+      img.addEventListener('touchmove', setMagnifier);
+      img.addEventListener('touchend', function (e) {
+        magnifier.style.display = 'none';
+        magnifier.style.opacity = '0';
+      });
+    });
+
+    document.querySelectorAll('.product-card').forEach(card => {
+  const img = card.querySelector('.product-img');
+  if (!img) return;
+
+  const magnifier = card.querySelector('.sand-magnifier');
+  // ...existing code...
+
+  function fadeOthers(focusCard, faded) {
+    document.querySelectorAll('.product-card').forEach(other => {
+      if (other !== focusCard) {
+        if (faded) {
+          other.classList.add('faded');
+        } else {
+          other.classList.remove('faded');
+        }
+      } else {
+        other.classList.remove('faded');
+      }
+    });
+  }
+
+  // Desktop hover
+  img.addEventListener('mouseenter', e => {
+    magnifier.style.display = 'block';
+    magnifier.style.opacity = '1';
+    fadeOthers(card, true);
+  });
+  img.addEventListener('mouseleave', e => {
+    magnifier.style.display = 'none';
+    magnifier.style.opacity = '0';
+    fadeOthers(card, false);
+  });
+
+  // Touch support
+  img.addEventListener('touchstart', function(e) {
+    setMagnifier(e);
+    magnifier.style.display = 'block';
+    magnifier.style.opacity = '1';
+    fadeOthers(card, true);
+  });
+  img.addEventListener('touchend', function(e) {
+    magnifier.style.display = 'none';
+    magnifier.style.opacity = '0';
+    fadeOthers(card, false);
+  });
+  img.addEventListener('touchcancel', function(e) {
+    magnifier.style.display = 'none';
+    magnifier.style.opacity = '0';
+    fadeOthers(card, false);
+  });
+});
+
+  </script>
+
+
 </body>
 
 </html>
