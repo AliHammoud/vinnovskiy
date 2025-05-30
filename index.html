@@ -6,23 +6,25 @@
   <title>Винновский Карьер</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Roboto Flex font (lightest weights) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,400;8..144,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,400;8..144,700&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <style>
     .HMND-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.25rem;
-  font-size: 0.9rem;
-  color: #999;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
-}
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.25rem;
+      font-size: 0.9rem;
+      color: #999;
+      margin-top: 2rem;
+      padding-bottom: 1rem;
+    }
 
-.HMND-container img {
-  height: 1rem;
-}
+    .HMND-container img {
+      height: 1rem;
+    }
 
     .sand-magnifier {
       display: none;
@@ -195,36 +197,42 @@
     }
 
     .hero-title {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 3;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  pointer-events: none;
-  font-size: clamp(1.1rem, 4vw, 2.5rem); /* Even smaller */
-  font-weight: 200;
-  line-height: 1.08;
-  padding: 4rem;         /* At least 4rem on all sides */
-  box-sizing: border-box;
-  color: var(--primary);
-  font-family: var(--main-font);
-}
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      pointer-events: none;
+      font-size: clamp(1.1rem, 4vw, 2.5rem);
+      /* Even smaller */
+      font-weight: 200;
+      line-height: 1.08;
+      padding: 4rem;
+      /* At least 4rem on all sides */
+      box-sizing: border-box;
+      color: var(--primary);
+      font-family: var(--main-font);
+    }
 
-.hero-title span {
-  pointer-events: none;
-  display: block;
-  width: 100%;
-  /* Optionally, max-width: 80%; */
-}
+    .hero-title span {
+      pointer-events: none;
+      display: block;
+      width: 100%;
+      /* Optionally, max-width: 80%; */
+    }
 
-.product-card.faded {
-  opacity: 0.38;
-  transition: opacity 0.24s;
-}
-.product-card {
-  transition: opacity 0.24s;
-}
+    .product-card.faded {
+      opacity: 0.38;
+      transition: opacity 0.24s;
+    }
+
+    .product-card {
+      transition: opacity 0.24s;
+    }
 
     /* QUARRY ROW */
     .quarry-row {
@@ -513,12 +521,12 @@
         flex-basis: 40%;
       }
     }
-    
+
     @media (max-width: 400px) {
-  .hero-title {
-    padding: 1rem;
-  }
-}
+      .hero-title {
+        padding: 1rem;
+      }
+    }
 
     @media (max-width: 700px) {
       .container {
@@ -541,7 +549,7 @@
 
       .hero-title {
         font-size: 1.2rem;
-        padding:2rem;
+        padding: 2rem;
       }
 
       .coords-block,
@@ -550,16 +558,17 @@
       }
 
       .footer-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.3rem;
-    padding: 1rem;
-  }
-  .footer-order {
-    align-items: flex-start;
-    text-align: left;
-    min-width: unset;
-  }
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.3rem;
+        padding: 1.5rem;
+      }
+
+      .footer-order {
+        align-items: flex-start;
+        text-align: left;
+        min-width: unset;
+      }
 
       .product-card {
         max-width: 100%;
@@ -580,39 +589,47 @@
         flex-basis: 48%;
         padding-left: 0.5rem;
       }
+
       .coords-val {
-    font-size: 1.1rem;
-  }
-  .coords-link {
-    font-size: 0.97rem;
-  }
+        font-size: 1.1rem;
+      }
+
+      .coords-link {
+        font-size: 0.97rem;
+      }
     }
 
     @media (max-width: 350px) {
-  .logo-img {
-    width: 5rem;
-    height: 0.5rem;
-  }
-  .header-phone {
-    font-size: 0.84rem;
-  }
-}
+      .logo-img {
+        width: 5rem;
+        height: 0.5rem;
+      }
+
+      .header-phone {
+        font-size: 0.84rem;
+      }
+      .footer-row {
+        padding: 0.6rem;
+      }
+    }
 
     @media (max-width: 500px) {
       .logo-img {
-    width: 7rem;
-    height: 0.7rem;
-  }
-  .header-phone {
-    font-size: 0.95rem;
-  }
+        width: 7rem;
+        height: 0.7rem;
+      }
+
+      .header-phone {
+        font-size: 0.95rem;
+      }
+
       .container {
         padding-left: 0.7rem;
         padding-right: 0.7rem;
       }
 
       .footer-row {
-        padding: 0.7rem;
+        padding: 1rem;
       }
 
       .header,
@@ -650,12 +667,14 @@
         flex-basis: 56%;
         padding-left: 0.2rem;
       }
+
       .coords-val {
-    font-size: 1rem;
-  }
-  .coords-link {
-    font-size: 0.89rem;
-  }
+        font-size: 1rem;
+      }
+
+      .coords-link {
+        font-size: 0.89rem;
+      }
     }
   </style>
 </head>
@@ -837,11 +856,11 @@
       </div>
     </div>
     <div class="HMND-container">
-  <p>создано</p>
-  <a href="https://hmnd.ru" target="_blank"></a>
-    <img src="./img/HMND_logo.svg" alt="HMND Studio Logo">
-  </a>
-</div>
+      <p>создано</p>
+      <a href="https://hmnd.ru" target="_blank"></a>
+      <img src="./img/HMND_logo.svg" alt="HMND Studio Logo">
+      </a>
+    </div>
   </div>
   <script>
     // --- PARAMETERS ---
@@ -1280,57 +1299,56 @@
     });
 
     document.querySelectorAll('.product-card').forEach(card => {
-  const img = card.querySelector('.product-img');
-  if (!img) return;
+      const img = card.querySelector('.product-img');
+      if (!img) return;
 
-  const magnifier = card.querySelector('.sand-magnifier');
-  // ...existing code...
+      const magnifier = card.querySelector('.sand-magnifier');
+      // ...existing code...
 
-  function fadeOthers(focusCard, faded) {
-    document.querySelectorAll('.product-card').forEach(other => {
-      if (other !== focusCard) {
-        if (faded) {
-          other.classList.add('faded');
-        } else {
-          other.classList.remove('faded');
-        }
-      } else {
-        other.classList.remove('faded');
+      function fadeOthers(focusCard, faded) {
+        document.querySelectorAll('.product-card').forEach(other => {
+          if (other !== focusCard) {
+            if (faded) {
+              other.classList.add('faded');
+            } else {
+              other.classList.remove('faded');
+            }
+          } else {
+            other.classList.remove('faded');
+          }
+        });
       }
+
+      // Desktop hover
+      img.addEventListener('mouseenter', e => {
+        magnifier.style.display = 'block';
+        magnifier.style.opacity = '1';
+        fadeOthers(card, true);
+      });
+      img.addEventListener('mouseleave', e => {
+        magnifier.style.display = 'none';
+        magnifier.style.opacity = '0';
+        fadeOthers(card, false);
+      });
+
+      // Touch support
+      img.addEventListener('touchstart', function (e) {
+        setMagnifier(e);
+        magnifier.style.display = 'block';
+        magnifier.style.opacity = '1';
+        fadeOthers(card, true);
+      });
+      img.addEventListener('touchend', function (e) {
+        magnifier.style.display = 'none';
+        magnifier.style.opacity = '0';
+        fadeOthers(card, false);
+      });
+      img.addEventListener('touchcancel', function (e) {
+        magnifier.style.display = 'none';
+        magnifier.style.opacity = '0';
+        fadeOthers(card, false);
+      });
     });
-  }
-
-  // Desktop hover
-  img.addEventListener('mouseenter', e => {
-    magnifier.style.display = 'block';
-    magnifier.style.opacity = '1';
-    fadeOthers(card, true);
-  });
-  img.addEventListener('mouseleave', e => {
-    magnifier.style.display = 'none';
-    magnifier.style.opacity = '0';
-    fadeOthers(card, false);
-  });
-
-  // Touch support
-  img.addEventListener('touchstart', function(e) {
-    setMagnifier(e);
-    magnifier.style.display = 'block';
-    magnifier.style.opacity = '1';
-    fadeOthers(card, true);
-  });
-  img.addEventListener('touchend', function(e) {
-    magnifier.style.display = 'none';
-    magnifier.style.opacity = '0';
-    fadeOthers(card, false);
-  });
-  img.addEventListener('touchcancel', function(e) {
-    magnifier.style.display = 'none';
-    magnifier.style.opacity = '0';
-    fadeOthers(card, false);
-  });
-});
-
   </script>
 
 
